@@ -1077,6 +1077,202 @@ Error: Could not open video: F:\Ai Ml\sem 2\AI Capstone\parking-helper\parking-h
 
 [2026-04-08 13:15:34] PL11 Update:
   -> Empty lots: 27
+  Process Process-1:
+Traceback (most recent call last):
+  File "C:\Users\ASUS\anaconda3\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\ASUS\anaconda3\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "F:\Ai Ml\sem 2\AI Capstone\parking-helper\parking-helper\main\main.py", line 166, in process_parking_lot
+    results = model.predict(
+              ^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\engine\model.py", line 536, in predict
+    return self.predictor.predict_cli(source=source) if is_cli else self.predictor(source=source, stream=stream)
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\engine\predictor.py", line 225, in __call__
+    return list(self.stream_inference(source, model, *args, **kwargs))  # merge list of Results into one
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\utils\_contextlib.py", line 40, in generator_context
+    response = gen.send(None)
+               ^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\engine\predictor.py", line 330, in stream_inference
+    preds = self.inference(im, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\engine\predictor.py", line 182, in inference
+    return self.model(im, augment=self.args.augment, visualize=visualize, embed=self.args.embed, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\autobackend.py", line 717, in forward
+    y = self.model(im, augment=augment, visualize=visualize, embed=embed, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\tasks.py", line 142, in forward
+    return self.predict(x, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\tasks.py", line 159, in predict
+    return self._predict_once(x, profile, visualize, embed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\tasks.py", line 181, in _predict_once
+    x = m(x)  # run
+        ^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\modules\block.py", line 311, in forward
+    y.extend(m(y[-1]) for m in self.m)
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\modules\block.py", line 311, in <genexpr>
+    y.extend(m(y[-1]) for m in self.m)
+             ^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\modules\block.py", line 481, in forward
+    return x + self.cv2(self.cv1(x)) if self.add else self.cv2(self.cv1(x))
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\modules\conv.py", line 89, in forward_fuse
+    return self.act(self.conv(x))
+                    ^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\conv.py", line 553, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\conv.py", line 548, in _conv_forward
+    return F.conv2d(
+           ^^^^^^^^^
+KeyboardInterrupt
+
+  -> Empty lots: 27
   -> Occupied lots: 16
 
-[2026-04-08 13:15:44] PL11 Update:
+[2026-04-08 13:12:11] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:12:23] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:12:33] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:12:43] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:12:54] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:13:05] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:13:15] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:13:25] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:13:37] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:13:47] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:13:58] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:14:09] PL11 Update:
+  -> Empty lots: 27Traceback (most recent call last):
+  File "F:\Ai Ml\sem 2\AI Capstone\parking-helper\parking-helper\main\main.py", line 365, in <module>
+    main()
+  File "F:\Ai Ml\sem 2\AI Capstone\parking-helper\parking-helper\main\main.py", line 360, in main
+    for p in processes: p.join()
+                        ^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\multiprocessing\process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\multiprocessing\popen_spawn_win32.py", line 112, in wait
+    res = _winapi.WaitForSingleObject(int(self._handle), msecs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:15:55] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:16:06] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:16:17] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:16:27] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:16:38] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:16:48] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:16:59] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:17:09] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:17:20] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:17:30] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-08 13:17:41] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
