@@ -2,6 +2,8 @@
 # SECTION: SQLite store — reservations + users
 # ============================================
 
+"""SQLite helpers for the shared reservations/users store used by the API and tests."""
+
 import sqlite3
 import os
 from pathlib import Path
@@ -22,17 +24,10 @@ def get_db():
     return conn
 
 
-def _migrate_reservations_qr_token(conn):
-    try:
-        conn.execute("ALTER TABLE reservations ADD COLUMN qr_token TEXT")
-        conn.commit()
-    except sqlite3.OperationalError:
-        pass
-
-
 def init_db():
     conn = get_db()
     try:
+        # The schema is kept intentionally lightweight so both tests and Streamlit clients can work through the API.
         conn.execute(
             """CREATE TABLE IF NOT EXISTS reservations (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -41,8 +36,7 @@ def init_db():
                 reserved_by TEXT NOT NULL,
                 reserved_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                 expires_at DATETIME NOT NULL,
-                status TEXT DEFAULT 'active',
-                qr_token TEXT
+                status TEXT DEFAULT 'active'
             )"""
         )
         conn.execute(
@@ -54,7 +48,6 @@ def init_db():
             )"""
         )
         conn.commit()
-        _migrate_reservations_qr_token(conn)
         _migrate_users_profile_columns(conn)
     finally:
         conn.close()

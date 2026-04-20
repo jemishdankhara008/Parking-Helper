@@ -1,9 +1,9 @@
 {
     "PL11": {
-        "timestamp": "2026-04-08 13:12:08",
+        "timestamp": "2026-04-20 13:23:41",
         "total_spots": 43,
-        "empty_spots": 27,
-        "occupied_spots": 16,
+        "empty_spots": 25,
+        "occupied_spots": 18,
         "spots": {
             "SP1": "occupied",
             "SP2": "occupied",
@@ -17,7 +17,7 @@
             "SP10": "occupied",
             "SP11": "occupied",
             "SP12": "occupied",
-            "SP13": "empty",
+            "SP13": "occupied",
             "SP14": "empty",
             "SP15": "occupied",
             "SP16": "empty",
@@ -30,7 +30,7 @@
             "SP23": "empty",
             "SP24": "occupied",
             "SP25": "occupied",
-            "SP26": "empty",
+            "SP26": "occupied",
             "SP27": "empty",
             "SP28": "empty",
             "SP29": "occupied",

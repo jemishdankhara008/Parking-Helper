@@ -1,0 +1,392 @@
+[PyTorch] Booting PL11 with yolov8n.pt on CPU...
+✅ Enterprise Monitor Active: PL11 (CLAHE + Polygon IoU)
+
+[2026-04-16 12:22:14] PL11 Update:
+  -> Empty lots: 43
+  -> Occupied lots: 0
+
+[2026-04-16 12:22:16] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:22:23] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:22:33] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:22:43] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:22:45] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:22:54] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:23:04] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:23:15] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:23:25] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:23:35] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:23:45] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:23:55] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:24:05] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:24:16] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:24:26] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:24:37] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:24:47] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:24:57] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:25:07] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:25:17] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:25:28] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:25:38] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:25:48] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:25:58] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:26:09] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:26:19] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:26:29] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:26:39] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:26:50] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:27:00] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:27:11] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:27:21] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:27:31] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:27:41] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:27:52] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:28:02] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:28:12] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:28:23] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:28:33] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:28:43] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:28:53] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:29:03] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:29:13] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:29:23] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:29:34] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:29:44] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:29:54] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:30:04] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:30:07] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 12:30:12] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:30:14] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:30:25] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:30:35] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:30:45] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:30:55] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:31:05] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:31:16] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:31:26] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:31:36] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:31:39] PL11 Update:
+  -> Empty lots: 25
+  -> Occupied lots: 18
+
+[2026-04-16 12:31:42] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:31:46] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:31:53] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 12:31:55] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:31:56] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:31:58] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 12:32:06] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 12:32:08] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:32:14] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 12:32:15] PL11 Update:
+  -> Empty lots: 25
+  -> Occupied lots: 18
+
+[2026-04-16 12:32:16] PL11 Update:
+  -> Empty lots: 24
+  -> Occupied lots: 19
+
+[2026-04-16 12:32:17] PL11 Update:
+  -> Empty lots: 24
+  -> Occupied lots: 19
+
+[2026-04-16 12:32:19] PL11 Update:
+  -> Empty lots: 25
+  -> Occupied lots: 18
+
+[2026-04-16 12:32:22] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 12:32:24] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:32:27] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:32:37] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:32:47] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:32:57] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:33:07] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:33:18] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:33:28] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:33:38] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:33:49] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:33:59] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:34:09] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:34:19] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:34:29] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:34:39] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:34:50] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:35:00] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:35:10] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:35:20] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:35:30] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:35:41] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:35:51] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:36:01] PL11 Update:

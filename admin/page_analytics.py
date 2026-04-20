@@ -50,6 +50,7 @@ def page_analytics() -> None:
 
         df["Timestamp"] = pd.to_datetime(df["Timestamp"], errors="coerce")
         df = df.dropna(subset=["Timestamp"]).sort_values("Timestamp")
+        # History rows store spot-level strings, so analytics are rebuilt by counting occupied markers across SP* columns.
         df["Occupied"] = df[spot_cols].apply(lambda r: (r == "occupied").sum(), axis=1)
         df["Available"] = df[spot_cols].apply(lambda r: (r == "available").sum(), axis=1)
         df["Pct"] = df["Occupied"] / len(spot_cols) * 100
@@ -112,6 +113,7 @@ def page_analytics() -> None:
                 pct_series = df["Pct"]
                 first_nonzero = pct_series[pct_series > 0].index.min()
                 last_nonzero = pct_series[pct_series > 0].index.max()
+                # Trim the idle zero-only edges so the chart scale reacts to actual occupancy changes, not startup gaps.
                 trimmed = pct_series.loc[first_nonzero:last_nonzero] if pd.notna(first_nonzero) and pd.notna(last_nonzero) else pct_series
                 y_min = max(0, trimmed.min() - 5)
                 y_max = min(100, trimmed.max() + 5)

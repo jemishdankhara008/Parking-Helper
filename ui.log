@@ -3,3 +3,62 @@
 
   URL: http://127.0.0.1:8501
 
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\ASUS\anaconda3\Lib\site-packages\streamlit\runtime\state\session_state.py:5 |
+| 32 in __getitem__                                                                    |
+|                                                                                      |
+| C:\Users\ASUS\anaconda3\Lib\site-packages\streamlit\runtime\state\session_state.py:5 |
+| 85 in _getitem                                                                       |
++--------------------------------------------------------------------------------------+
+KeyError
+
+During handling of the above exception, another exception occurred:
+
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\ASUS\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.p |
+| y:129 in exec_func_with_error_handling                                               |
+|                                                                                      |
+| C:\Users\ASUS\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_runn |
+| er.py:689 in code_to_exec                                                            |
+|                                                                                      |
+| F:\Ai Ml\sem 2\AI Capstone\parking-helper\parking-helper\ui\app_ui.py:947 in         |
+| <module>                                                                             |
+|                                                                                      |
+|   944                                                                                |
+|   945                                                                                |
+|   946 if __name__ == "__main__":  # Script entry point                               |
+| > 947     main()  # Start Streamlit app                                              |
+|   948                                                                                |
+|                                                                                      |
+| F:\Ai Ml\sem 2\AI Capstone\parking-helper\parking-helper\ui\app_ui.py:907 in main    |
+|                                                                                      |
+|   904         </div>                                                                 |
+|   905         """, unsafe_allow_html=True)  # Render sidebar header branding         |
+|   906                                                                                |
+| > 907         page = st.radio("Nav", ["Dashboard", "Analyse Image", "Reserve a Spot" |
+|   908                                                                                |
+|   909         st.divider()  # Visual separator                                       |
+|   910         if check_api_health():  # Probe FastAPI                                |
+|                                                                                      |
+| C:\Users\ASUS\anaconda3\Lib\site-packages\streamlit\runtime\metrics_util.py:563 in   |
+| wrapped_func                                                                         |
+|                                                                                      |
+| C:\Users\ASUS\anaconda3\Lib\site-packages\streamlit\elements\widgets\radio.py:401 in |
+| radio                                                                                |
+|                                                                                      |
+| C:\Users\ASUS\anaconda3\Lib\site-packages\streamlit\elements\widgets\radio.py:493 in |
+| _radio                                                                               |
+|                                                                                      |
+| C:\Users\ASUS\anaconda3\Lib\site-packages\streamlit\runtime\state\safe_session_state |
+| .py:99 in filtered_state                                                             |
+|                                                                                      |
+| C:\Users\ASUS\anaconda3\Lib\site-packages\streamlit\runtime\state\session_state.py:4 |
+| 78 in filtered_state                                                                 |
+|                                                                                      |
+| C:\Users\ASUS\anaconda3\Lib\site-packages\streamlit\runtime\state\session_state.py:5 |
+| 39 in __getitem__                                                                    |
++--------------------------------------------------------------------------------------+
+KeyError: 'st.session_state has no key 
+"$$WIDGET_ID-6165d81ed2b401ba25cee9f5cf9d2a18-None". Did you forget to initialize it? 
+More info: 
+https://docs.streamlit.io/develop/concepts/architecture/session-state#initialization'

@@ -1,4 +1,5 @@
 """One-time script to create README.docx from README.md content."""
+# Documentation helper that exports a polished Word version of the project README for submission or sharing.
 from docx import Document
 from docx.shared import Pt, Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -39,6 +40,7 @@ def add_code_block(doc, code):
 
 def main():
     doc = Document()
+    # The content is generated procedurally so the DOCX can be rebuilt after README wording changes.
     doc.add_heading('Parking Helper', 0)
 
     doc.add_paragraph()

@@ -57,6 +57,7 @@ def build_occupancy_context() -> str:
         info = _latest_row_occupancy(f)
         if not info:
             continue
+        # Feed the LLM a compact per-lot snapshot instead of raw CSV content to keep prompts small and grounded.
         lines.append(
             f"- Lot {info['lot']}: total spots={info['total_spots']}, "
             f"occupied={info['occupied_spots']}, available={info['available_spots']} "
@@ -129,6 +130,7 @@ def page_chatbot() -> None:
         st.session_state.chatbot_messages = []
 
     occupancy_ctx = build_occupancy_context()
+    # The latest history row is used as a lightweight ground-truth snapshot without making a live API call here.
     system_prompt = (
         "You are a helpful parking assistant for the Parking Helper capstone project at Cambrian College. "
         "You answer questions about parking lot availability, typical busy times, and practical navigation "
@@ -222,6 +224,6 @@ def page_chatbot() -> None:
                     }
                 )
             st.rerun()
-
+    
     if not api_key:
         st.caption("Set OPENAI_API_KEY in your environment to enable assistant replies.")

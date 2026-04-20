@@ -3,6 +3,7 @@
 # • expire stale before reads • POST reserve GET list DELETE cancel GET available
 # • register GET /reservations/history before GET /reservations/{lot_id} path order
 # ============================================
+# Reservation routes bridge two sources of truth: live detector JSON for occupancy and SQLite for temporary holds.
 import json  # load parking_status.json
 from datetime import datetime, timedelta  # expiry timestamps
 from pathlib import Path  # project-relative paths

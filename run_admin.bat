@@ -1,4 +1,5 @@
 @echo off
+REM Quick launcher for the local admin dashboard with basic env validation.
 cd /d "%~dp0"
 REM Admin-only Streamlit (localhost).
 REM Set ADMIN_PANEL_PASSWORD before running, or add admin_panel_password to .streamlit/secrets.toml.

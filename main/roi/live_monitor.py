@@ -1,3 +1,4 @@
+# Standalone ROI playback monitor for validating saved polygons against a live or recorded video source.
 import cv2
 import numpy as np
 import pandas as pd
@@ -84,6 +85,7 @@ def run_parking_monitor(video_source, root_dir, csv_name):
         # Create a dictionary to track the status of each spot this frame (Default: False / Empty)
         spot_status = {spot_id: False for spot_id in spots.keys()}
 
+        # This monitor uses center-point inclusion, which is simpler than main/main.py but easier to inspect interactively.
         # Run YOLO detection
         results = model.predict(frame, verbose=False, conf=0.25)
         

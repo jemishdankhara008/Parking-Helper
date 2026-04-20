@@ -87,6 +87,7 @@ def sort_spots_sequentially(polygons):
         i = 0
         while i < len(spots_data):
             candidate = spots_data[i]
+            # Group boxes into visual rows first so generated spot ids read left-to-right in the UI.
             tolerance = max(20, seed['height'] * 0.65)
             if abs(candidate['bottom_y'] - seed['bottom_y']) <= tolerance:
                 current_row.append(spots_data.pop(i))
@@ -264,6 +265,7 @@ def run_smart_mapper(video_source, root_dir, output_csv_name, playback_speed=2, 
             for det in results_zoomed[0].boxes.data:
                 zx1, zy1, zx2, zy2, conf, cls = map(int, det[:6])
                 if cls in [2, 3, 5, 7]: 
+                    # Zoomed detections are projected back into the original frame to recover smaller distant cars.
                     x1 = int(zx1 / scale_factor)
                     y1 = int(zy1 / scale_factor)
                     x2 = int(zx2 / scale_factor)
@@ -311,6 +313,7 @@ def run_smart_mapper(video_source, root_dir, output_csv_name, playback_speed=2, 
                     if calculate_iou((x1, y1, x2, y2), spot['box']) > 0.65:
                         spot['count'] += 1
                         matched = True
+                        # A candidate becomes a real ROI only after it persists across many frames of the scan.
                         if spot['count'] == lock_in_threshold:
                             discovered_spots.append(spot['box'])
                         break
@@ -375,6 +378,7 @@ def run_smart_mapper(video_source, root_dir, output_csv_name, playback_speed=2, 
     raw_polygons = []
     for box in final_clean_boxes:
         x1, y1, x2, y2 = box
+        # The manual correction phase works with simple quadrilaterals, so auto-discovered boxes are converted here.
         raw_polygons.append([(x1, y1), (x2, y1), (x2, y2), (x1, y2)])
 
     all_spots = sort_spots_sequentially(raw_polygons)
@@ -418,6 +422,7 @@ def run_smart_mapper(video_source, root_dir, output_csv_name, playback_speed=2, 
     if all_spots:
         formatted_data = []
         for spot_id, spot in all_spots.items():
+            # Persist the corrected polygon vertices in the exact shape expected by main/main.py.
             formatted_data.append({
                 'SpotID': spot_id,
                 'Point1_X': spot[0][0], 'Point1_Y': spot[0][1],

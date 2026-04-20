@@ -4,6 +4,7 @@
 # If LIVE_ADMIN_SECRET is unset, endpoints stay open (local dev only).
 # ============================================
 
+# Live file-serving routes used by the admin and user dashboards for frames, logs, and detector status.
 import os
 from pathlib import Path
 from typing import Optional
@@ -25,6 +26,7 @@ def verify_live_token(x_admin_token: Optional[str] = Header(None, alias="X-Admin
     secret = (os.environ.get("LIVE_ADMIN_SECRET") or "").strip()
     if not secret:
         return
+    # A shared header token is enough here because these routes expose machine output, not end-user account data.
     if not x_admin_token or x_admin_token.strip() != secret:
         raise HTTPException(status_code=401, detail="Invalid or missing X-Admin-Token")
 

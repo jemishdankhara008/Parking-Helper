@@ -1,4 +1,5 @@
 @echo off
+REM Convenience launcher that opens the API, user UI, admin UI, and detector in separate terminals.
 echo ===================================================
 echo Starting all Parking Helper components...
 echo ===================================================

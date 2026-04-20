@@ -1,4 +1,5 @@
 # Live monitor — latest frame from detection engine
+# Simple page that streams the latest detector JPEG through the FastAPI live endpoint.
 import io
 import streamlit as st
 import requests
@@ -11,6 +12,7 @@ def page_live():
     st.markdown("### Live Monitor")
     st.caption("Requires `main/main.py` detection loop saving `data/latest_frame.jpg` each second.")
     try:
+        # Pulling through the API keeps auth and deployment behavior consistent with the admin dashboard.
         r = requests.get(f"{base}/live/latest", timeout=10)
         if r.status_code == 200:
             st.image(io.BytesIO(r.content), use_container_width=True)

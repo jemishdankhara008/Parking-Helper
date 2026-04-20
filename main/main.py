@@ -65,6 +65,7 @@ def load_detection_model(root_dir, parking_lot_id):
 def is_detection_inside_spot(car_box, car_area, spot_poly, spot_pts, center_point, bottom_center_point):
     """Use polygon IoU plus point-based fallbacks to recover practical parked-car matching."""
     if spot_poly is None or not car_box.intersects(spot_poly):
+        # Degenerate polygons or near-misses still get a chance through point checks so bad ROI shapes do not break detection.
         return (
             cv2.pointPolygonTest(spot_pts, center_point, False) >= 0
             or cv2.pointPolygonTest(spot_pts, bottom_center_point, False) >= 0
@@ -208,11 +209,13 @@ def process_parking_lot(parking_lot_id, video_source_path, roi_csv_path, output_
             if current_frame_hits[i]:
                 state['occupied_hits'] += 1
                 state['empty_hits'] = 0
+                # A spot only flips to occupied after several agreeing frames to reduce detector flicker.
                 if state['occupied_hits'] >= LOCK_THRESHOLD:
                     state['status'] = 'occupied'
             else:
                 state['empty_hits'] += 1
                 state['occupied_hits'] = 0
+                # The same debounce happens in reverse so a single missed box does not free a parked car immediately.
                 if state['empty_hits'] >= FREE_THRESHOLD:
                     state['status'] = 'empty'
                     
@@ -229,6 +232,7 @@ def process_parking_lot(parking_lot_id, video_source_path, roi_csv_path, output_
             print(f"  -> Occupied lots: {occupied_count}")
 
             with lock:
+                # Each worker process owns one lot, so the lock prevents concurrent CSV/JSON rewrites from clobbering each other.
                 # Update CSV
                 try:
                     df = pd.read_csv(output_csv_path)
@@ -344,6 +348,7 @@ def main():
         roi_filename = os.path.basename(lot['ROI'])
         roi_path = os.path.join(root_dir, 'data', roi_filename)
 
+        # The first configured lot publishes the preview frame used by the admin/user live stream pages.
         p = Process(target=process_parking_lot, args=(
             lot['ParkingLotID'], 
             lot['URL'], 

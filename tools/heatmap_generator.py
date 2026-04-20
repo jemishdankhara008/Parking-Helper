@@ -1,3 +1,4 @@
+# Utility script that accumulates vehicle detections into a heatmap image for manual ROI planning.
 import cv2
 import numpy as np
 from ultralytics import YOLO
@@ -57,6 +58,7 @@ def generate_heatmap(video_source, root_dir, output_filename):
         results = model.predict(frame, verbose=False, conf=0.25)
         detections = results[0].boxes.data
 
+        # Each detected vehicle increments the pixels under its box so repeated parking patterns brighten over time.
         # Add Heat
         for det in detections:
             x1, y1, x2, y2, conf, cls = det

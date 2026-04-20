@@ -1,3 +1,4 @@
+# Main user-facing Streamlit app for dashboard, image analysis, reservations, chatbot, and project info.
 import os  # API_URL from env (local) or Streamlit Cloud secrets
 import streamlit as st  # Web UI framework for dashboard
 import requests  # HTTP client for FastAPI calls
@@ -11,6 +12,7 @@ import pandas as pd  # Load history CSV for analytics
 import altair as alt  # Build charts for analytics page
 import numpy as np
 
+from page_auth import clear_auth_state, page_login, page_profile, page_signup, request_nav, sync_auth_user
 from page_reserve import page_reserve
 
 
@@ -132,6 +134,234 @@ def inject_css():  # Push custom CSS into Streamlit page
     ::-webkit-scrollbar-thumb:hover { background: #FF3B3B44; }
     .stAlert { border-radius: 10px !important; border: 1px solid #2A2D3A !important; }
     [data-testid="stDataFrame"] { border: 1px solid #2A2D3A; border-radius: 10px; }
+    .landing-shell {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #2A2D3A;
+        border-radius: 22px;
+        background:
+            radial-gradient(circle at 78% 18%, rgba(110, 117, 255, 0.28), transparent 24%),
+            radial-gradient(circle at 18% 0%, rgba(255, 59, 59, 0.18), transparent 20%),
+            linear-gradient(180deg, #12131A 0%, #11131A 100%);
+        padding: 26px 26px 32px 26px;
+        margin-bottom: 24px;
+    }
+    .landing-topbar {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:16px;
+        padding: 10px 6px 22px 6px;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+        margin-bottom: 30px;
+    }
+    .landing-brand {
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.4px;
+        color: #F0F0F5;
+    }
+    .landing-links {
+        display:flex;
+        gap:18px;
+        flex-wrap:wrap;
+        justify-content:center;
+        font-size:12px;
+        color:#8B8FA3;
+    }
+    .landing-pill {
+        background: #F5F6FA;
+        color: #11131A;
+        padding: 10px 16px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.24);
+    }
+    .landing-grid {
+        display:grid;
+        grid-template-columns: 1.25fr 0.8fr 1.05fr;
+        gap: 14px;
+        align-items: stretch;
+    }
+    .landing-hero-copy {
+        padding: 14px 12px 14px 6px;
+    }
+    .landing-kicker {
+        display:inline-block;
+        font-size:11px;
+        font-weight:700;
+        letter-spacing:1px;
+        text-transform:uppercase;
+        color:#FF8DA1;
+        margin-bottom:16px;
+    }
+    .landing-title {
+        font-size: 42px;
+        line-height: 1.08;
+        letter-spacing: -1.2px;
+        color: #F0F0F5;
+        font-weight: 800;
+        margin-bottom: 16px;
+        max-width: 420px;
+    }
+    .landing-copy {
+        max-width: 420px;
+        color: #8B8FA3;
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 22px;
+    }
+    .landing-card {
+        border: 1px solid rgba(255,255,255,0.10);
+        border-radius: 16px;
+        background: rgba(17, 19, 26, 0.82);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+    }
+    .landing-metric-card {
+        padding: 18px;
+        background:
+            radial-gradient(circle at top left, rgba(122, 93, 255, 0.36), transparent 35%),
+            linear-gradient(180deg, rgba(59,73,255,0.92), rgba(56,68,180,0.82));
+        min-height: 186px;
+    }
+    .landing-metric-label {
+        color: rgba(255,255,255,0.82);
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    .landing-metric-value {
+        color: white;
+        font-size: 62px;
+        line-height: 1;
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: -1px;
+    }
+    .landing-metric-sub {
+        color: rgba(255,255,255,0.82);
+        font-size: 12px;
+        line-height: 1.6;
+        margin-bottom: 18px;
+        max-width: 180px;
+    }
+    .landing-chart-card {
+        padding: 16px 18px 14px 18px;
+        min-height: 186px;
+    }
+    .landing-chart-title {
+        color:#F0F0F5;
+        font-size:15px;
+        font-weight:700;
+        margin-bottom:4px;
+    }
+    .landing-chart-copy {
+        color:#8B8FA3;
+        font-size:12px;
+        margin-bottom:16px;
+    }
+    .landing-chart-box {
+        height: 112px;
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 12px;
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
+            radial-gradient(circle at 35% 35%, rgba(255, 95, 152, 0.20), transparent 32%);
+        position: relative;
+        overflow: hidden;
+    }
+    .landing-chart-box::before {
+        content:"";
+        position:absolute;
+        inset:0;
+        background:
+            linear-gradient(to top, transparent 23%, rgba(255,255,255,0.08) 24%, transparent 25%, transparent 48%, rgba(255,255,255,0.08) 49%, transparent 50%, transparent 73%, rgba(255,255,255,0.08) 74%, transparent 75%);
+    }
+    .landing-chart-box::after {
+        content:"";
+        position:absolute;
+        left:10px;
+        right:10px;
+        bottom:12px;
+        height:72px;
+        border-radius: 999px 999px 10px 10px;
+        background: linear-gradient(90deg, rgba(71,122,255,0.92), rgba(255,84,140,0.88));
+        clip-path: polygon(0 18%, 14% 8%, 28% 65%, 46% 46%, 60% 64%, 78% 70%, 100% 92%, 100% 100%, 0 100%);
+        opacity:0.95;
+    }
+    .landing-chart-dot {
+        position:absolute;
+        width:10px;
+        height:10px;
+        border-radius:50%;
+        background:#FF67A8;
+        top:22px;
+        left:58%;
+        box-shadow: 0 0 0 5px rgba(255, 103, 168, 0.12);
+    }
+    .landing-feature-row {
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 18px;
+    }
+    .landing-feature-card {
+        background: rgba(13, 15, 22, 0.88);
+        border: 1px solid rgba(255,255,255,0.05);
+        border-radius: 14px;
+        padding: 18px;
+        min-height: 132px;
+    }
+    .landing-feature-title {
+        color:#F0F0F5;
+        font-size:16px;
+        font-weight:700;
+        margin-bottom:10px;
+    }
+    .landing-feature-copy {
+        color:#8B8FA3;
+        font-size:13px;
+        line-height:1.65;
+    }
+    .landing-footer {
+        margin-top: 22px;
+        padding: 26px 28px;
+        border-radius: 18px;
+        background:
+            radial-gradient(circle at 12% 10%, rgba(126, 198, 255, 0.28), transparent 24%),
+            linear-gradient(135deg, #F2F5F9, #F8FAFD);
+        color:#11131A;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:18px;
+        flex-wrap:wrap;
+    }
+    .landing-footer-title {
+        font-size: 16px;
+        font-weight: 800;
+        margin-bottom: 8px;
+        color:#141722;
+    }
+    .landing-footer-copy {
+        font-size: 14px;
+        max-width: 360px;
+        line-height: 1.6;
+        color:#4B5162;
+    }
+    @media (max-width: 980px) {
+        .landing-grid, .landing-feature-row {
+            grid-template-columns: 1fr;
+        }
+        .landing-title {
+            font-size: 34px;
+        }
+        .landing-topbar {
+            align-items:flex-start;
+            flex-direction:column;
+        }
+    }
     </style>
     """, unsafe_allow_html=True)  # Render first style block as HTML
     # Second small style block for progress bar font
@@ -875,12 +1105,52 @@ def page_about():  # Static project information page
     st.markdown(table_html, unsafe_allow_html=True)  # Render model table
 
 
+def page_home():  # Public landing page before authentication
+    st.markdown(
+        """
+        <div style="background:linear-gradient(135deg, #1A1D27, #11131A);border:1px solid #2A2D3A;border-radius:18px;padding:44px;margin-bottom:24px;">
+            <div style="font-size:12px;color:#FF3B3B;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">Parking Helper</div>
+            <div style="font-size:34px;font-weight:800;color:#F0F0F5;letter-spacing:-0.8px;line-height:1.15;margin-bottom:12px;">
+                Smart parking access starts here.
+            </div>
+            <div style="font-size:15px;color:#8B8FA3;max-width:700px;line-height:1.7;">
+                Sign in or create an account to access live parking availability, reserve a spot, manage your profile,
+                and receive reservation confirmations.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    c1, c2, c3 = st.columns(3)
+    cards = [
+        ("Live Access", "View protected parking data only after login for a cleaner and safer flow."),
+        ("Fast Reservations", "Reserve available spots from your authenticated account without re-entering your details."),
+        ("Profile + Alerts", "Keep your profile updated and receive confirmation emails when configured."),
+    ]
+    for col, (title, desc) in zip([c1, c2, c3], cards):
+        with col:
+            st.markdown(
+                f"""
+                <div style="background:#1A1D27;border:1px solid #2A2D3A;border-radius:14px;padding:20px;height:170px;">
+                    <div style="font-size:16px;font-weight:700;color:#F0F0F5;margin-bottom:10px;">{title}</div>
+                    <div style="font-size:13px;color:#8B8FA3;line-height:1.7;">{desc}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+    st.markdown("---")
+    st.info("Use the sidebar to sign in or create an account. Until then, the rest of the frontend stays locked.")
+
+
 from chatbot import page_chatbot
 
 
 def main():  # App entry builds layout and routes
     st.set_page_config(page_title="Parking Helper", page_icon="🅿️", layout="wide")  # Streamlit page options
     inject_css()  # Apply custom dark theme
+    sync_auth_user(API_URL)  # Restore the signed-in user from the session token when available.
 
     # ============================================
     # SECTION: Sidebar
@@ -904,7 +1174,38 @@ def main():  # App entry builds layout and routes
         </div>
         """, unsafe_allow_html=True)  # Render sidebar header branding
 
-        page = st.radio("Nav", ["Dashboard", "Analyse Image", "Reserve a Spot", "Chatbot", "About"], label_visibility="collapsed", key="nav")  # Page selection
+        auth_user = st.session_state.get("auth_user")
+        nav_options = ["Home"]
+        if auth_user:
+            nav_options.extend(["Dashboard", "Analyse Image", "Reserve a Spot", "My Profile", "Chatbot", "About"])
+        else:
+            nav_options.extend(["Login", "Sign Up"])
+
+        pending_nav = st.session_state.pop("_nav_target", None)
+        if pending_nav in nav_options:
+            st.session_state["nav"] = pending_nav
+
+        current_nav = st.session_state.get("nav")
+        if current_nav not in nav_options:
+            st.session_state["nav"] = nav_options[0]
+
+        page = st.radio("Nav", nav_options, label_visibility="collapsed", key="nav")  # Page selection
+
+        if auth_user:
+            st.markdown("---")
+            st.markdown(
+                f"""
+                <div style="background:#1A1D27;border:1px solid #2A2D3A;border-radius:10px;padding:12px;margin-bottom:10px;">
+                    <div style="font-size:11px;color:#8B8FA3;text-transform:uppercase;letter-spacing:0.8px;">Account</div>
+                    <div style="font-size:14px;font-weight:700;color:#F0F0F5;margin-top:4px;">{auth_user.get("username", "")}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+            if st.button("Logout", use_container_width=True, key="logout_btn"):
+                clear_auth_state()
+                request_nav("Home")
+                st.rerun()
 
         st.divider()  # Visual separator
         if check_api_health():  # Probe FastAPI
@@ -931,12 +1232,23 @@ def main():  # App entry builds layout and routes
     # • Uses the About page as the fallback when nothing else matches
     # ============================================
 
-    if page == "Dashboard":  # Dashboard selected
+    if not auth_user and page not in {"Home", "Login", "Sign Up"}:
+        page = "Home"
+
+    if page == "Home":  # Public landing page selected
+        page_home()  # Render home page
+    elif page == "Dashboard":  # Dashboard selected
         page_dashboard()  # Render dashboard
     elif page == "Analyse Image":  # Analyse selected
         page_analyse()  # Render analyse page
     elif page == "Reserve a Spot":  # Reserve selected
         page_reserve()  # Render reservation page
+    elif page == "Login":  # Login selected
+        page_login(API_URL)  # Render login page
+    elif page == "Sign Up":  # Sign up selected
+        page_signup(API_URL)  # Render sign up page
+    elif page == "My Profile":  # Profile selected
+        page_profile(API_URL)  # Render profile page
     elif page == "Chatbot":  # Chatbot selected
         page_chatbot()  # Render parking assistant chatbot
     else:  # About or default

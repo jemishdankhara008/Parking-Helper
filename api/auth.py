@@ -4,6 +4,7 @@
 
 import os
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -14,6 +15,13 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 from .database import get_db
+
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv(Path(__file__).resolve().parents[1] / ".env")
+except ImportError:
+    pass
 
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
@@ -71,6 +79,7 @@ def hash_password(password):
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
+    # Store an absolute UTC expiry so FastAPI and Streamlit clients can treat the token consistently.
     expire = datetime.now(timezone.utc) + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, _jwt_secret(), algorithm=ALGORITHM)
@@ -86,6 +95,7 @@ def get_user_by_username(username: str):
 
 
 def _row_to_public(row: dict) -> UserPublic:
+    # The project currently uses username as both login id and public email-style identifier.
     return UserPublic(
         id=row["id"],
         username=row["username"],
@@ -160,6 +170,7 @@ def update_me(body: UserUpdate, username: str = Depends(get_current_username)):
     user = get_user_by_username(username)
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+    # Preserve existing profile values when a partial PATCH omits one of the optional fields.
     fn = body.full_name if body.full_name is not None else user.get("full_name")
     ph = body.phone if body.phone is not None else user.get("phone")
     conn = get_db()

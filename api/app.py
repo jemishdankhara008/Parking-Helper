@@ -1,3 +1,4 @@
+# FastAPI entrypoint that wires together prediction, reservations, auth, and live-monitor routes.
 from fastapi import FastAPI, HTTPException, UploadFile, File  # Web API and file upload types
 from fastapi.middleware.cors import CORSMiddleware  # Browser / Streamlit Cloud → Render
 from pydantic import BaseModel  # Validate structured JSON responses
@@ -10,7 +11,6 @@ import torch  # CUDA availability and device placement
 from .reservations import router as reservations_router
 from .live_routes import router as live_router
 from .auth import router as auth_router
-from .qr_routes import router as qr_router
 
 
 def _cors_allow_origins():  # CORS_ORIGINS=* or comma-separated list (e.g. https://yourapp.streamlit.app)
@@ -42,7 +42,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(qr_router)
 app.include_router(reservations_router)
 app.include_router(auth_router)
 app.include_router(live_router)

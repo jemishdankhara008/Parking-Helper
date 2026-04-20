@@ -3,11 +3,15 @@
 # • request_json • lot_keys • load_lot_spots
 # ============================================
 
+# Reservation page for end users: available spots, active holds, history, and lot-wide status chips.
 import json  # Parse parking_status for lot dropdown and overview
 import streamlit as st  # Build reservation UI pages
 import requests  # Call FastAPI reservation endpoints
 from pathlib import Path  # Resolve data paths from this file location
 from datetime import datetime, timezone  # Parse expiry and show time remaining
+
+from page_auth import get_auth_headers
+from notifications import looks_like_email, send_reservation_confirmation
 
 DATA = Path(__file__).resolve().parent.parent / "data"  # Project data directory path
 PJ = DATA / "parking_status.json"  # Live occupancy JSON sibling to SQLite db
@@ -20,6 +24,10 @@ def request_json(method, path, **kw):  # Return (data-or-None, error-or-None) tu
         if not getattr(request_json, "_dbg", False):  # log once per process
             print("page_reserve: APIRouter prefix=no prefix; UI GET", base + "/reservations", base + "/available/PL03", "POST", base + "/reserve")  # noqa: T201
             request_json._dbg = True  # mark logged
+        headers = dict(kw.pop("headers", {}) or {})
+        headers.update(get_auth_headers())
+        if headers:
+            kw["headers"] = headers
         r = requests.request(method, base + path, timeout=TO, **kw)  # Single round trip
         if r.status_code >= 400:  # HTTP error responses from API
             try:  # Prefer JSON detail when present
@@ -89,10 +97,22 @@ def _cancel_reservation_on_click(rid):  # DELETE only when this callback runs (r
         st.rerun()  # Refresh lists
 
 
+def _confirmation_target(auth_username: str, typed_email: str, fallback_name: str) -> str:
+    if looks_like_email(auth_username):
+        return auth_username
+    if looks_like_email(typed_email):
+        return typed_email.strip()
+    if looks_like_email(fallback_name):
+        return fallback_name.strip()
+    return ""
+
+
 # ============================================
 # SECTION: Page — reserve book list overview three panels one lot key
 # ============================================
 def page_reserve():  # Fifth Streamlit page registered in app_ui main
+    auth_user = st.session_state.get("auth_user") or {}
+    auth_username = (auth_user.get("username") or "").strip()
     st.markdown('<div style="font-size:28px;font-weight:700;color:#F0F0F5;">Reserve a Parking Spot</div>', unsafe_allow_html=True)  # Title
     st.markdown('<div style="font-size:14px;color:#8B8FA3;margin-bottom:20px;">Book a spot in advance — reservation holds for your selected duration</div>', unsafe_allow_html=True)  # Subtitle
     if st.session_state.pop("_cancel_ok_toast", False):  # After successful cancel callback
@@ -114,7 +134,24 @@ def page_reserve():  # Fifth Streamlit page registered in app_ui main
     if st.session_state.get("_rv_spot_reset"):  # Clear spot before widgets use rv_spot
         st.session_state["rv_spot"] = None  # Reset selection
         del st.session_state["_rv_spot_reset"]  # One-shot flag
-    user_name = st.text_input("Your name or email", key="rv_user_name")  # Single name for reserve and my list
+    if st.session_state.get("_rv_email_reset"):
+        st.session_state["rv_user_email"] = ""
+        del st.session_state["_rv_email_reset"]
+    if auth_username:
+        st.session_state["rv_user_name"] = auth_username
+        st.text_input("Your account", value=auth_username, disabled=True, key="rv_user_name_display")
+        st.caption("Reservations created while signed in are linked to your account.")
+        user_name = auth_username
+    else:
+        user_name = st.text_input("Your name or email", key="rv_user_name")  # Single name for reserve and my list
+    user_email = st.text_input(
+        "Confirmation email (optional)",
+        key="rv_user_email",
+        disabled=looks_like_email(auth_username),
+        placeholder="Enter an email if you want a reservation confirmation",
+    )
+    if looks_like_email(auth_username):
+        st.caption(f"Confirmation emails will be sent to {auth_username}.")
     avail, aerr = request_json("GET", f"/available/{lot}") if lot else (None, "no lot")  # Free spots
     if aerr and lot:  # API error when lot set
         st.error(aerr)  # Non-fatal
@@ -132,14 +169,36 @@ def page_reserve():  # Fifth Streamlit page registered in app_ui main
         lab = st.selectbox("Duration", dur_labels, key="rv_dm")  # Picked label string
         dm = dur_minutes[lab]  # Integer minutes for POST
         if st.button("Confirm Reservation", key="rv_go"):  # Submit
+            if not user_name.strip():
+                st.error("Enter your name or sign in before reserving a spot.")
+                return
             body = {"spot_id": st.session_state.rv_spot, "lot_id": lot, "reserved_by": user_name, "duration_minutes": dm}  # Payload
             out, err = request_json("POST", "/reserve", json=body)  # Create row
             if err:  # Conflict or server error
                 st.error(err)  # Show detail
             else:  # Success
                 st.toast(f"Reserved #{out.get('id')} until {out.get('expires_at')}")  # Toast
+                target_email = _confirmation_target(auth_username, user_email, user_name)
+                if target_email:
+                    ok, msg = send_reservation_confirmation(
+                        to_email=target_email,
+                        reserved_by=auth_user.get("full_name") or user_name,
+                        lot_id=lot,
+                        spot_id=st.session_state.rv_spot,
+                        duration_minutes=dm,
+                        expires_at=str(out.get("expires_at", "")),
+                        reservation_id=out.get("id", ""),
+                    )
+                    if ok:
+                        st.success(f"Confirmation email sent to {target_email}")
+                    else:
+                        st.warning(f"Reservation saved but email failed: {msg}")
+                else:
+                    st.info("Reservation saved. Add a valid email if you want confirmation emails.")
                 st.session_state["_rv_spot_reset"] = True  # Defer clear until before widgets next run
-                st.session_state["_rv_name_reset"] = True  # Defer clear until before text_input next run
+                if not auth_username:
+                    st.session_state["_rv_name_reset"] = True  # Defer clear until before text_input next run
+                st.session_state["_rv_email_reset"] = True
                 st.rerun()  # Refresh
     # ============================================
     # SECTION: My Reservations — filter actives cancel DELETE history expander
@@ -151,7 +210,7 @@ def page_reserve():  # Fifth Streamlit page registered in app_ui main
     rows, rerr = request_json("GET", "/reservations")  # Active rows
     if rerr:  # API offline
         st.error(rerr)  # Error box
-    name_for_list = st.session_state.get("rv_user_name", "")  # Fresh from widget state
+    name_for_list = auth_username or st.session_state.get("rv_user_name", "")  # Prefer the authenticated account when available.
     act = [x for x in (rows or []) if name_for_list.lower() in (x.get("reserved_by") or "").lower()] if name_for_list else (rows or [])  # Filtered actives
     for x in act:  # Cards
         exp = x.get("expires_at")  # Expiry string from API

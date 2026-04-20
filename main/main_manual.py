@@ -1,3 +1,4 @@
+# Older detector implementation kept as a manual/reference version alongside main/main.py.
 import cv2
 import numpy as np
 from ultralytics import YOLO
@@ -111,6 +112,7 @@ def process_parking_lot(parking_lot_id, video_source_path, roi_csv_path, output_
                     # Red Box for cars driving in the aisle or not in a spot
                     cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 2)
 
+        # The rolling vote smooths out noisy detections before a spot is marked occupied in the live outputs.
         # Stability Filter (5-frame window)
         final_status = []
         for i in range(len(spots)):

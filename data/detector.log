@@ -1276,3 +1276,1056 @@ Update:
 [2026-04-08 13:17:41] PL11 Update:
   -> Empty lots: 27
   -> Occupied lots: 16
+
+--- DETECTOR STARTED AT 2026-04-16 12:45:43.383493 ---
+Process Process-1:
+Traceback (most recent call last):
+  File "C:\Users\ASUS\anaconda3\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\ASUS\anaconda3\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "F:\Ai Ml\sem 2\AI Capstone\parking-helper\parking-helper\main\main.py", line 166, in process_parking_lot
+    results = model.predict(
+              ^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\engine\model.py", line 536, in predict
+    return self.predictor.predict_cli(source=source) if is_cli else self.predictor(source=source, stream=stream)
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\engine\predictor.py", line 225, in __call__
+    return list(self.stream_inference(source, model, *args, **kwargs))  # merge list of Results into one
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\utils\_contextlib.py", line 40, in generator_context
+    response = gen.send(None)
+               ^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\engine\predictor.py", line 330, in stream_inference
+    preds = self.inference(im, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\engine\predictor.py", line 182, in inference
+    return self.model(im, augment=self.args.augment, visualize=visualize, embed=self.args.embed, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\autobackend.py", line 717, in forward
+    y = self.model(im, augment=augment, visualize=visualize, embed=embed, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\tasks.py", line 142, in forward
+    return self.predict(x, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\tasks.py", line 159, in predict
+    return self._predict_once(x, profile, visualize, embed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\tasks.py", line 181, in _predict_once
+    x = m(x)  # run
+        ^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\modules\head.py", line 151, in forward
+    preds = self.forward_head(x, **self.one2many)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\modules\head.py", line 143, in forward_head
+    boxes = torch.cat([box_head[i](x[i]).view(bs, 4 * self.reg_max, -1) for i in range(self.nl)], dim=-1)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\modules\head.py", line 143, in <listcomp>
+    boxes = torch.cat([box_head[i](x[i]).view(bs, 4 * self.reg_max, -1) for i in range(self.nl)], dim=-1)
+                       ^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\container.py", line 253, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\ultralytics\nn\modules\conv.py", line 89, in forward_fuse
+    return self.act(self.conv(x))
+                    ^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\conv.py", line 553, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\site-packages\torch\nn\modules\conv.py", line 548, in _conv_forward
+    return F.conv2d(
+           ^^^^^^^^^
+KeyboardInterrupt
+[PyTorch] Booting PL11 with yolov8n.pt on CPU...
+✅ Enterprise Monitor Active: PL11 (CLAHE + Polygon IoU)
+
+[2026-04-16 12:46:10] PL11 Update:
+  -> Empty lots: 43
+  -> Occupied lots: 0
+
+[2026-04-16 12:46:17] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:46:17] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:46:29] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:46:40] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:46:52] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:47:03] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:47:14] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:47:25] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:47:36] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:47:47] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 12:47:54] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:47:58] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:48:09] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:48:20] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:48:31] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:48:41] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:48:51] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:49:02] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:49:12] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:49:24] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:49:44] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:49:55] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:50:06] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:50:18] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:50:28] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:50:39] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:50:49] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:51:00] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:51:10] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:51:21] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:51:32] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:51:43] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:51:54] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:52:04] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:52:15] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 12:52:26] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+Traceback (most recent call last):
+  File "F:\Ai Ml\sem 2\AI Capstone\parking-helper\parking-helper\main\main.py", line 365, in <module>
+    main()
+  File "F:\Ai Ml\sem 2\AI Capstone\parking-helper\parking-helper\main\main.py", line 360, in main
+    for p in processes: p.join()
+                        ^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\multiprocessing\process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\anaconda3\Lib\multiprocessing\popen_spawn_win32.py", line 112, in wait
+    res = _winapi.WaitForSingleObject(int(self._handle), msecs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+--- DETECTOR STARTED AT 2026-04-16 14:16:50.191620 ---
+[PyTorch] Booting PL11 with yolov8n.pt on CPU...
+✅ Enterprise Monitor Active: PL11 (CLAHE + Polygon IoU)
+
+[2026-04-16 14:17:08] PL11 Update:
+  -> Empty lots: 43
+  -> Occupied lots: 0
+
+[2026-04-16 14:17:11] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 14:17:18] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 14:17:28] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 14:17:39] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 14:17:49] PL11 Update:
+  -> Empty lots: 28
+  -> Occupied lots: 15
+
+[2026-04-16 14:17:58] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:18:00] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:18:10] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:18:21] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:18:31] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:18:42] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:18:52] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:19:02] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:19:13] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:19:23] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:19:34] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:19:44] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:19:55] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:20:05] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:20:15] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:20:26] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:20:36] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:20:46] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:20:57] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:21:07] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:21:17] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:21:27] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:21:37] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:21:48] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:21:58] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:22:08] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:22:19] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:22:29] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:22:40] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:22:50] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:23:00] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:23:11] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:23:21] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:23:32] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:23:42] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:23:53] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:24:03] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:24:13] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:24:24] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:24:34] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:24:44] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:24:55] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:25:06] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:25:16] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:25:27] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:25:37] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:25:48] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:25:58] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:26:09] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:26:20] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:26:30] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:26:40] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:26:50] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:27:00] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:27:11] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:27:22] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:27:32] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:27:42] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:27:52] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:28:02] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:28:13] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:28:23] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:28:34] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:28:44] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:28:54] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:29:05] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:29:15] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:29:25] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:29:35] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:29:45] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:29:56] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:30:06] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:30:17] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:30:27] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:30:37] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:30:43] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 14:30:48] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 14:30:51] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:30:58] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:31:08] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:31:18] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:31:29] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:31:39] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:31:50] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:32:00] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:32:11] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:32:21] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:32:31] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:32:42] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:32:52] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:33:03] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:33:13] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:33:23] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:33:27] PL11 Update:
+  -> Empty lots: 25
+  -> Occupied lots: 18
+
+[2026-04-16 14:33:33] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:33:33] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:33:44] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:33:53] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 14:33:54] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 14:33:58] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:34:03] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 14:34:04] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 14:34:15] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 14:34:18] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:34:25] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:34:30] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 14:34:31] PL11 Update:
+  -> Empty lots: 25
+  -> Occupied lots: 18
+
+[2026-04-16 14:34:33] PL11 Update:
+  -> Empty lots: 24
+  -> Occupied lots: 19
+
+[2026-04-16 14:34:36] PL11 Update:
+  -> Empty lots: 24
+  -> Occupied lots: 19
+
+[2026-04-16 14:34:38] PL11 Update:
+  -> Empty lots: 25
+  -> Occupied lots: 18
+
+[2026-04-16 14:34:43] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 14:34:46] PL11 Update:
+  -> Empty lots: 26
+  -> Occupied lots: 17
+
+[2026-04-16 14:34:46] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:34:56] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:35:07] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:35:17] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:35:27] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:35:38] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:35:48] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:35:58] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:36:08] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:36:19] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:36:30] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:36:40] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:36:51] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:37:01] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:37:11] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:37:22] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:37:32] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:37:42] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:37:53] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:38:06] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:38:17] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:38:27] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:38:40] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:38:58] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:39:20] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:39:40] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:40:00] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:40:10] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:40:22] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:40:40] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:40:53] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:41:06] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:41:17] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:41:28] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:41:49] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:42:01] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:42:13] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:42:26] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:42:37] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:42:48] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:42:58] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:43:11] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:43:24] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:43:35] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:43:56] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:44:08] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:44:22] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:44:32] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:44:42] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:45:02] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:45:13] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:45:27] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:45:40] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:45:53] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:46:03] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:46:16] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:46:29] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 14:46:43] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:38:11] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:38:39] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:39:00] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:39:17] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:39:31] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:39:46] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:39:57] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:40:09] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:40:29] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:40:49] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:41:12] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:41:24] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:41:36] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:41:56] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:42:12] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:42:23] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:42:36] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:42:50] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:43:01] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:43:12] PL11 Update:
+  -> Empty lots: 27
+  -> Occupied lots: 16
+
+[2026-04-16 15:43:26] PL11 Update:forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFBF124A3CD  Unknown               Unknown  Unknown
+KERNEL32.dll       00007FFBF33DE8D7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFBF3BEC3FC  Unknown               Unknown  Unknown

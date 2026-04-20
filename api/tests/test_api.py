@@ -1,3 +1,4 @@
+# Lightweight smoke tests that exercise a running local API instance over real HTTP.
 import requests
 import os
 
@@ -51,6 +52,7 @@ def test_info():
 def test_predict_valid():
     img_path = get_test_image()
     with open(img_path, "rb") as f:
+        # These tests intentionally hit the multipart endpoint the same way the Streamlit UI does.
         r = requests.post(
             f"{API_URL}/predict",
             files={"file": (os.path.basename(img_path), f, "image/jpeg")}

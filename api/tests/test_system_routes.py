@@ -1,3 +1,4 @@
+# Integration tests reload the API modules against an isolated in-memory database and test data directory.
 import importlib
 import json
 import uuid
@@ -30,20 +31,19 @@ def app_ctx(monkeypatch):
         encoding="utf-8",
     )
 
+    # Environment variables are patched before reload so module-level startup code binds to the test runtime.
     monkeypatch.setenv("PARKING_HELPER_DB_PATH", db_path)
     monkeypatch.setenv("JWT_SECRET", "test-jwt-secret")
     monkeypatch.setenv("LIVE_ADMIN_SECRET", "admin-token")
 
     import api.database as database
     import api.auth as auth
-    import api.qr_routes as qr_routes
     import api.reservations as reservations
     import api.live_routes as live_routes
     import api.app as app_module
 
     database = importlib.reload(database)
     auth = importlib.reload(auth)
-    qr_routes = importlib.reload(qr_routes)
     reservations = importlib.reload(reservations)
     live_routes = importlib.reload(live_routes)
 
@@ -148,33 +148,6 @@ def test_reservations_create_available_cancel_and_history(app_ctx):
     history = client.get("/reservations/history")
     assert history.status_code == 200, history.text
     assert any(row["status"] == "cancelled" for row in history.json())
-
-
-def test_qr_owner_and_admin_access(app_ctx):
-    client = app_ctx["client"]
-    database = app_ctx["database"]
-
-    owner_headers = _register_and_login(client, "owner@example.com")
-    other_headers = _register_and_login(client, "other@example.com")
-    reservation_id = _insert_active_reservation(database, "PL11", "SP1", "owner@example.com")
-
-    unauth = client.post(f"/qr/reservation/{reservation_id}")
-    assert unauth.status_code == 401, unauth.text
-
-    created = client.post(f"/qr/reservation/{reservation_id}", headers=owner_headers)
-    assert created.status_code == 200, created.text
-    token = created.json()["qr_token"]
-
-    blocked = client.get(f"/qr/data/{token}", headers=other_headers)
-    assert blocked.status_code == 403, blocked.text
-
-    allowed_owner = client.get(f"/qr/data/{token}", headers=owner_headers)
-    assert allowed_owner.status_code == 200, allowed_owner.text
-    assert allowed_owner.json()["reserved_by"] == "owner@example.com"
-
-    allowed_admin = client.get(f"/qr/image/{token}", headers={"X-Admin-Token": "admin-token"})
-    assert allowed_admin.status_code == 200, allowed_admin.text
-    assert allowed_admin.headers["content-type"].startswith("image/png")
 
 
 def test_live_routes_require_admin_token_and_report_files(app_ctx):

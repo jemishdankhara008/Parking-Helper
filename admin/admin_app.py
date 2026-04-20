@@ -1,6 +1,7 @@
 # Admin: Left sidebar navigation — streams on first two views; full controls on the third.
 # Run from project root: streamlit run admin/admin_app.py --server.port 8502 --server.address 127.0.0.1
 
+# Main admin dashboard for detector control, ROI tooling, live previews, and analytics.
 import io
 import os
 import subprocess
@@ -101,6 +102,7 @@ def _launch_detector():
     log_file.write(f"\n--- DETECTOR STARTED AT {pd.Timestamp.now()} ---\n")
     log_file.flush()
     
+    # The detector runs in a separate process so the Streamlit admin app stays responsive.
     proc = subprocess.Popen(
         [sys.executable, str(DETECTOR_SCRIPT)],
         cwd=str(PROJECT_ROOT),
